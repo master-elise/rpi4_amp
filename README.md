@@ -1,3 +1,5 @@
+# Asymmetric MultiProcessing (AMP) on Raspberry Pi 4
+
 ## Compile Buildroot for Raspberry Pi 4:
 
 ```
@@ -89,9 +91,9 @@ Run the following commands to launch the FreeRTOS demonstration:
 ```
 setenv autostart yes
 dcache off
-fatload mmc 0:1 0x28000000 /uart.elf
+fatload mmc 0:1 0x30000000 /uart.elf
 dcache flush
-bootelf 0x28000000
+bootelf 0x30000000
 ```
 resulting, on the second serial port (pins 27 and 28) in the message
 
@@ -131,7 +133,7 @@ and add in ``cmdline.txt`` the option
 maxcpus=3
 ```
 Loading and launching FreeRTOS is similar as above. Once FreeRTOS is running (as seen on the
-second UART), in U-Boot:
+second UART), in U-Boot [run](https://stackoverflow.com/questions/59580877/raspberry-pi-4-u-boot-on-booting-hanging-in-starting-kernel):
 ```
 setenv bootargs root=/dev/mmcblk0p2 rootwait console=tty1 console=ttyAMA0,115200 maxcpus=3
 fatload mmc 0:1 ${kernel_addr_r} Image
@@ -139,3 +141,4 @@ fatload mmc 0:1 ${fdt_addr} bcm2711-rpi-4-b.dtb
 booti ${kernel_addr_r} - ${fdt_addr}
 ```
 
+<img src="rpi4_FreeRTOS.jpg">
