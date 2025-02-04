@@ -1,4 +1,5 @@
-Compile Buildroot for Raspberry Pi 4:
+## Compile Buildroot for Raspberry Pi 4:
+
 ```
 wget https://buildroot.org/downloads/buildroot-2024.11.1.tar.gz
 tar zxvf buildroot-2024.11.1.tar.gz
@@ -25,6 +26,8 @@ Configure the SD-card with ``sudo dd if=output/images/sdcard.img of=/dev/sdd bs=
 where ``/dev/sdd`` is replaced with the block device created when inserting the SD-card (identified
 with ``sudo dmesg | tail``).
 
+## Compile the baremetal toolchain and FreeRTOS for Raspberry Pi 4:
+
 Following https://github.com/TImada/raspi4_freertos, compile FreeRTOS for the Raspberry Pi 4. 
 
 First we need a cross-compilation toolchain for baremetal 64-bit ARM, which can be generated using 
@@ -48,6 +51,8 @@ Then ``git clone https://github.com/TImada/raspi4_freertos`` and
 cd raspi4_freertos/Demo/CORTEX_A72_64-bit_Raspberrypi4/uart
 make CROSS=aarch64-unknown-elf-
 ``` 
+
+## Update the SD-card configuration to launch U-Boot
 
 Mount the first partition of the SD-card we flashed earlier (``sudo mount /dev/sdd1 /mnt``) and
 edit the content of ``config.txt`` to append with ``enable_uart=1`` and replace
@@ -100,3 +105,37 @@ resulting, on the second serial port (pins 27 and 28) in the message
 00000000000007D2                                                                
 0000000000000BBB                                                                
 ```
+
+## Running GNU/Linux next to FreeRTOS
+
+As opposed to https://github.com/TImada/raspi4_freertos stating to run ``dtc`` on the target, never
+ever install development tools on the target but only cross-compile on the host.
+
+```
+export PATH=$HOME/buildroot-2024.11.1_rpi4/output/host/usr/bin:$PATH
+```
+to use Buildroot's ``dtc`` command and in ``raspi4_freertos/dts`` (make sure ``which dtc`` leads
+to the Buildroot ``dtc``):
+```
+dtc -O dtb -I dts ./raspi4-rpmsg.dtso -o ./raspi4-rpmsg.dtbo
+```
+and ``sudo cp raspi4-rpmsg.dtbo /mnt/overlays`` assuming the SD-card first partition is accessible 
+in ``/mnt``. 
+
+Edit in this same partition ``config.txt`` and add at the end (after ``enable_uart=1``): 
+```
+dtoverlay=raspi4-rpmsg
+```
+and add in ``cmdline.txt`` the option
+```
+maxcpus=3
+```
+Loading and launching FreeRTOS is similar as above. Once FreeRTOS is running (as seen on the
+second UART), in U-Boot:
+```
+setenv bootargs root=/dev/mmcblk0p2 rootwait console=tty1 console=ttyAMA0,115200 maxcpus=3
+fatload mmc 0:1 ${kernel_addr_r} Image
+fatload mmc 0:1 ${fdt_addr} bcm2711-rpi-4-b.dtb
+booti ${kernel_addr_r} - ${fdt_addr}
+```
+
