@@ -137,7 +137,6 @@ maxcpus=3
 ```
 Loading and launching FreeRTOS is similar as above. Once FreeRTOS is running (as seen on the
 second UART), in U-Boot [run](https://stackoverflow.com/questions/59580877/raspberry-pi-4-u-boot-on-booting-hanging-in-starting-kernel):
-<img src="rpi4_FreeRTOS.jpg">
 
 ```
 fatload mmc 0:1 ${kernel_addr_r} Image
@@ -145,3 +144,36 @@ fatload mmc 0:1 ${fdt_addr_r} bcm2711-rpi-4-b.dtb
 setenv bootargs earlyprintk root=/dev/mmcblk0p2 rw rootwait maxcpus=3 console=ttyAMA0,115200
 booti ${kernel_addr_r} - ${fdt_addr}
 ```
+
+to start the Linux kernel and load GNU tools from the root filesystem.
+
+<img src="rpi4_FreeRTOS.jpg">
+
+At the moment, *either* Linux or FreeRTOS will run on the Raspberry Pi 4, but not both at the same
+time since
+```
+"Synchronous Abort" handler, esr 0x96000021, far 0x2000a44
+elr: 000000000008aab8 lr : 000000000008aaa8 (reloc)
+elr: 0000000039b45ab8 lr : 0000000039b45aa8
+x0 : 0000000002000a44 x1 : 0000000000000008
+x2 : 000000000000000a x3 : 0000000000000064
+x4 : 000000000000000a x5 : 000000000200ddff
+x6 : 0000000000000a04 x7 : 0000000002000000
+x8 : 00000000000009f0 x9 : 000000003972831c
+x10: 0000000000000003 x11: 0000000000000998
+x12: 00000000397283a8 x13: 0000000002000000
+x14: 0000000000000000 x15: 0000000039728428
+x16: 0000000039b70588 x17: 0000000000000000
+x18: 0000000039736dd0 x19: 0000000000000998
+x20: 0000000000000000 x21: 0000000002000000
+x22: 0000000039bb9674 x23: 0000000039728630
+x24: 0000000000000000 x25: 0000000000000000
+x26: 0000000000000000 x27: 000000003974e300
+x28: 000000003974e2d0 x29: 00000000397283e0
+
+Code: b40000e0 b9403fe1 7100203f 54000081 (f9400000) 
+Resetting CPU ...
+```
+## RPMSG
+
+Followup will address https://github.com/TImada/raspi4_freertos_rpmsg from Buildroot
