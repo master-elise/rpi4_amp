@@ -24,6 +24,9 @@ to compile U-Boot. Edit ``output/build/uboot-2024.10/.config`` and uncomment ``C
 to set it to active. Recompile with ``make uboot`` to regenerate 
 ``output/build/uboot-2024.10/u-boot.bin``.
 
+The Buildroot configuration we used is provided in <a href="buildroot-2024.11.1_rpi4_defconfig">
+buildroot-2024.11.1_rpi4_defconfig</a>.
+
 Configure the SD-card with ``sudo dd if=output/images/sdcard.img of=/dev/sdd bs=8M status=progress``
 where ``/dev/sdd`` is replaced with the block device created when inserting the SD-card (identified
 with ``sudo dmesg | tail``).
@@ -134,11 +137,11 @@ maxcpus=3
 ```
 Loading and launching FreeRTOS is similar as above. Once FreeRTOS is running (as seen on the
 second UART), in U-Boot [run](https://stackoverflow.com/questions/59580877/raspberry-pi-4-u-boot-on-booting-hanging-in-starting-kernel):
+<img src="rpi4_FreeRTOS.jpg">
+
 ```
-setenv bootargs root=/dev/mmcblk0p2 rootwait console=tty1 console=ttyAMA0,115200 maxcpus=3
 fatload mmc 0:1 ${kernel_addr_r} Image
-fatload mmc 0:1 ${fdt_addr} bcm2711-rpi-4-b.dtb
+fatload mmc 0:1 ${fdt_addr_r} bcm2711-rpi-4-b.dtb
+setenv bootargs earlyprintk root=/dev/mmcblk0p2 rw rootwait maxcpus=3 console=ttyAMA0,115200
 booti ${kernel_addr_r} - ${fdt_addr}
 ```
-
-<img src="rpi4_FreeRTOS.jpg">
