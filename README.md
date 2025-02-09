@@ -149,6 +149,8 @@ to start the Linux kernel and load GNU tools from the root filesystem.
 
 <img src="rpi4_FreeRTOS.jpg">
 
+<img src="2025-02-09-130741_2944x1080_scrot.png">
+
 Notice an error message leading to the Raspberry Pi4 rebooting such as
 
 ```
@@ -181,3 +183,5 @@ is due to an erroneous memory mapping leading to an error by the MMU. Make sure 
 ## RPMSG
 
 Followup will address https://github.com/TImada/raspi4_freertos_rpmsg from Buildroot
+
+
