@@ -94,9 +94,9 @@ Run the following commands to launch the FreeRTOS demonstration:
 ```
 setenv autostart yes
 dcache off
-fatload mmc 0:1 0x30000000 /uart.elf
+fatload mmc 0:1 0x28000000 /uart.elf
 dcache flush
-bootelf 0x30000000
+bootelf 0x28000000
 ```
 resulting, on the second serial port (pins 27 and 28) in the message
 
@@ -149,8 +149,8 @@ to start the Linux kernel and load GNU tools from the root filesystem.
 
 <img src="rpi4_FreeRTOS.jpg">
 
-At the moment, *either* Linux or FreeRTOS will run on the Raspberry Pi 4, but not both at the same
-time since
+Notice an error message leading to the Raspberry Pi4 rebooting such as
+
 ```
 "Synchronous Abort" handler, esr 0x96000021, far 0x2000a44
 elr: 000000000008aab8 lr : 000000000008aaa8 (reloc)
@@ -174,6 +174,10 @@ x28: 000000003974e2d0 x29: 00000000397283e0
 Code: b40000e0 b9403fe1 7100203f 54000081 (f9400000) 
 Resetting CPU ...
 ```
+
+is due to an erroneous memory mapping leading to an error by the MMU. Make sure to load
+``uart-linux.elf`` to 0x28000000 and not 0x30000000.
+
 ## RPMSG
 
 Followup will address https://github.com/TImada/raspi4_freertos_rpmsg from Buildroot
