@@ -25,7 +25,12 @@ to set it to active. Recompile with ``make uboot`` to regenerate
 ``output/build/uboot-2024.10/u-boot.bin``.
 
 The Buildroot configuration we used is provided in <a href="buildroot-2024.11.1_rpi4_defconfig">
-buildroot-2024.11.1_rpi4_defconfig</a>.
+buildroot-2024.11.1_rpi4_defconfig</a> and assumes, to include Open-AMP and libmetal support, that
+the [BR2\_EXTERNAL](https://github.com/oscimp/oscimp_br2_external) is installed with
+```
+export BR2_EXTERNAL=/my/directory/oscimp_br2_external
+```
+to add these packages.
 
 Configure the SD-card with ``sudo dd if=output/images/sdcard.img of=/dev/sdd bs=8M status=progress``
 where ``/dev/sdd`` is replaced with the block device created when inserting the SD-card (identified
@@ -202,7 +207,7 @@ with Crosstool-NG.
 OpenAMP and LibMetal were added to Buildroot at the https://github.com/oscimp/oscimp_br2_external ``BR2_EXTERNAL``
 repository. Select these items in the Extra packages after defining ``export BR2_EXTERNAL=my/path/oscimp_br2_external``.
 
-Since the words slave and master are no longer allowed in American English, we must update ``samples/linux/rpmsg_echo/src/main.c``
+Since the words slave and master are [no longer](https://github.com/OpenAMP/open-amp/commit/afed3bd11737b6a1b958d22ff0da2343a6895592) allowed in American English, we must update ``samples/linux/rpmsg_echo/src/main.c``
 by replacing ``VIRTIO_DEV_MASTER`` with ``VIRTIO_DEV_DRIVER`` as well as in ``open-amp/apps/machine/raspi4/platform_info.c``.
 Finally we must replace ``-L/usr/local/lib`` in ``samples/linux/rpmsg_echo/build/Makefile`` with the Buildroot 
 ``output/host/aarch64-buildroot-linux-gnu/sysroot/usr/lib`` and similarly replace ``INCLUDEPATH1 ?= /usr/local/include`` 
