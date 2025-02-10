@@ -99,9 +99,10 @@ Run the following commands to launch the FreeRTOS demonstration:
 ```
 setenv autostart yes
 dcache off
-fatload mmc 0:1 0x28000000 /uart.elf
+fatload mmc 0:1 0x30000000 /uart.elf
 dcache flush
-bootelf 0x28000000
+bootelf 0x30000000
+dcache on
 ```
 resulting, on the second serial port (pins 27 and 28) in the message
 
@@ -182,8 +183,7 @@ Code: b40000e0 b9403fe1 7100203f 54000081 (f9400000)
 Resetting CPU ...
 ```
 
-is due to an erroneous memory mapping leading to an error by the MMU. Make sure to load
-``uart-linux.elf`` to 0x28000000 and not 0x30000000.
+is due to forgetting ``dcache on`` after booting FreeRTOS.
 
 ## RPMSG
 
