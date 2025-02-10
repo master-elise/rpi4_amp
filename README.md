@@ -66,7 +66,7 @@ of the Linux kernel. Copy ``output/build/uboot-2024.10/u-boot.bin`` from the Bui
 to this SD-card partition, as well as ``raspi4_freertos/Demo/CORTEX_A72_64-bit_Raspberrypi4/uart/uart.elf``. Unmount the SD-card (``sudo umount /mnt``).
 
 Launch the Raspberry Pi 4 fitted with this new SD-card: if all goes well the serial port (pins 
-8 and 10) shoud display the U-Boot prompt:
+8 and 10) should display the U-Boot prompt:
 ```
 U-Boot 2025.04-rc1-00063-g2b1c8d3b2da4-dirty (Feb 04 2025 - 06:45:40 +0000)
 
@@ -207,3 +207,5 @@ by replacing ``VIRTIO_DEV_MASTER`` with ``VIRTIO_DEV_DRIVER`` as well as in ``op
 Finally we must replace ``-L/usr/local/lib`` in ``samples/linux/rpmsg_echo/build/Makefile`` with the Buildroot 
 ``output/host/aarch64-buildroot-linux-gnu/sysroot/usr/lib`` and similarly replace ``INCLUDEPATH1 ?= /usr/local/include`` 
 with the Buildroot ``output/host/aarch64-buildroot-linux-gnu/sysroot/usr/include``.
+
+<img src="2025-02-10-073944_2704x1050_scrot.png">
