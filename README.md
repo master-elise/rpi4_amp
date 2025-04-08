@@ -16,14 +16,15 @@ still in the Buildroot directory:
 ```
 make menuconfig
 ```
-and go to Bootloaders -> U-Boot -> Board defconfig and fill with ``rpi_4``. Also activate the option ``U-Boot needs OpenSSL`` 
-to avoid the error related to missing ``openssl/evp.h``. Then
+and go to Bootloaders -> U-Boot -> Board defconfig and fill with ``rpi_4``. Also activate the options U-Boot needs gnutls and 
+``U-Boot needs OpenSSL`` to avoid the error related to missing ``openssl/evp.h``. Then
 ```
 make
 ```
-to compile U-Boot. Edit ``output/build/uboot-2024.10/.config`` and uncomment ``CONFIG_CMD_CACHE=y``
-to set it to active. Recompile with ``make uboot`` to regenerate 
-``output/build/uboot-2024.10/u-boot.bin``.
+to compile U-Boot. Edit ``output/build/uboot-*/.config`` and uncomment ``CONFIG_CMD_CACHE=y``
+to set it to active. Recompile with ``make uboot-rebuild && make`` to regenerate 
+``output/build/uboot-*/u-boot.bin`` (do **not** ``make uboot-reconfigure`` which will remove
+the change in the ``.config`` we just inserted).
 
 The Buildroot configuration we used is provided in <a href="buildroot-2024.11.1_rpi4_defconfig">
 buildroot-2024.11.1_rpi4_defconfig</a> and assumes, to include Open-AMP and libmetal support, that
