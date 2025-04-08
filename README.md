@@ -27,7 +27,8 @@ to set it to active. Recompile with ``make uboot-rebuild && make`` to regenerate
 the change in the ``.config`` we just inserted).
 
 The Buildroot configuration we used is provided in <a href="buildroot-2024.11.1_rpi4_defconfig">
-buildroot-2024.11.1_rpi4_defconfig</a> and assumes, to include Open-AMP and libmetal support, that
+buildroot-2024.11.1_rpi4_defconfig</a> or <a href="buildroot-2025.02_rpi4_defconfig">buildroot-2025.02_rpi4_defconfig</a>
+and assumes, to include Open-AMP and libmetal support, that
 the [BR2\_EXTERNAL](https://github.com/oscimp/oscimp_br2_external) is installed with
 ```
 export BR2_EXTERNAL=/my/directory/oscimp_br2_external
