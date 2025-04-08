@@ -16,7 +16,8 @@ still in the Buildroot directory:
 ```
 make menuconfig
 ```
-and go to Bootloaders -> U-Boot -> Board defconfig and fill with ``rpi_4``. Then
+and go to Bootloaders -> U-Boot -> Board defconfig and fill with ``rpi_4``. Also activate the option ``U-Boot needs OpenSSL`` 
+to avoid the error related to missing ``openssl/evp.h``. Then
 ```
 make
 ```
