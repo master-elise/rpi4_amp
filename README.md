@@ -196,7 +196,7 @@ We continue with a new FreeRTOS application found at https://github.com/TImada/r
 ``git clone --recursive https://github.com/TImada/raspi4_freertos_rpmsg``, edit 
 ``libmetal/cmake/platforms/raspi4-freertos.cmake`` and ``open-amp/cmake/platforms/raspi4_a72_generic.cmake`` 
 and replace ``aarch64-none-elf-`` of ``CROSS_PREFIX`` with ``aarch64-unknown-elf-``. Then follow the sequence 
-proposed at https://github.com/TImada/raspi4_freertos_rpmsg/blob/master/docs/freertos_build.md
+proposed at https://github.com/TImada/raspi4_freertos_rpmsg/blob/master/docs/freertos_build.md from step 4 and onward.
 
 Add ``#include <stdint.h>`` at the beginning of ``samples/freertos/rpmsg_ping/src/uart.h``   
 and an explicit cast from pointer to integer as ``irq_vect = (int)prproc->armlocal_dev->irq_info;`` in
