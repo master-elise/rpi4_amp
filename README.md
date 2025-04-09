@@ -223,7 +223,9 @@ with the Buildroot ``output/host/aarch64-buildroot-linux-gnu/sysroot/usr/include
 match the Buildroot compiler name, and make to generate the binary after making sure the Buildroot ``output/host/bin`` is still in
 the PATH.
 
-Launch the FreeRTOS application ``rpmsg_ping`` as we did above, then launch the Linux kernel as we did above, and from GNU/Linux launch the userspace 
-application ``rpmsg_echo.elf`` for communicating from GNU/Linux with FreeRTOS.
+Copy the FreeRTOS application ``rpmsg_ping.elf`` to the SD card first partition and the GNU/Linux ``rpmsg_echo`` to the second partition ``/root``. 
+Launch the FreeRTOS application ``rpmsg_ping.elf`` as we did above,
+then launch the Linux kernel as we did above, and from GNU/Linux launch the userspace 
+application ``rpmsg_echo`` for communicating from GNU/Linux with FreeRTOS.
 
 <img src="2025-02-10-073944_2704x1050_scrot.png">
