@@ -203,10 +203,10 @@ proposed at https://github.com/TImada/raspi4_freertos_rpmsg/blob/master/docs/fre
 sure the shell variable ``RASPI4_BASE`` has been set to the directory holding ``raspi4_freertos_rpmsg`` and ``raspi4_freertos``.
 At the end of step 5, make sure to ``make CROSS=aarch64-unknown-elf-`` (``unknown`` instead of ``none``).
 
-Add <del>``#include <stdint.h>`` at the beginning of ``samples/freertos/rpmsg_ping/src/uart.h``   
+<del>Add ``#include <stdint.h>`` at the beginning of ``samples/freertos/rpmsg_ping/src/uart.h``   
 and</del> an explicit cast from pointer to integer as ``irq_vect = (int)prproc->armlocal_dev->irq_info;`` in
 ``open-amp/apps/machine/raspi4/raspi4_a72_rproc.c`` to avoid errors with GCC-14 used to generate the toolchain
-with Crosstool-NG.
+with Crosstool-NG.</del>
 
 ### GNU/Linux application
 
