@@ -213,12 +213,17 @@ with Crosstool-NG.</del>
 OpenAMP and LibMetal were added to Buildroot at the https://github.com/oscimp/oscimp_br2_external ``BR2_EXTERNAL``
 repository. Select these items in the Extra packages after defining ``export BR2_EXTERNAL=my/path/oscimp_br2_external``.
 
-Since the words slave and master are [no longer](https://github.com/OpenAMP/open-amp/commit/afed3bd11737b6a1b958d22ff0da2343a6895592) allowed in American English, we must update ``samples/linux/rpmsg_echo/src/main.c``
+Since the words slave and master are [no longer](https://github.com/OpenAMP/open-amp/commit/afed3bd11737b6a1b958d22ff0da2343a6895592) 
+allowed in American English, we must update ``samples/linux/rpmsg_echo/src/main.c``
 by replacing ``VIRTIO_DEV_MASTER`` with ``VIRTIO_DEV_DRIVER`` as well as in ``open-amp/apps/machine/raspi4/platform_info.c``.
 Finally we must replace ``-L/usr/local/lib`` in ``samples/linux/rpmsg_echo/build/Makefile`` with the Buildroot 
 ``output/host/aarch64-buildroot-linux-gnu/sysroot/usr/lib`` and similarly replace ``INCLUDEPATH1 ?= /usr/local/include`` 
-with the Buildroot ``output/host/aarch64-buildroot-linux-gnu/sysroot/usr/include``.
+with the Buildroot ``output/host/aarch64-buildroot-linux-gnu/sysroot/usr/include``. Replace in 
+``raspi4_freertos_rpmsg/samples/linux/rpmsg_echo/build/Makefile`` the ``CROSS ?= aarch64-linux-gnu-`` with ``CROSS ?= aarch64-linux-`` to
+match the Buildroot compiler name, and make to generate the binary after making sure the Buildroot ``output/host/bin`` is still in
+the PATH.
 
-Launch the FreeRTOS application as we did above, then launch the Linux kernel as we did above, and from GNU/Linux launch the userspace application for communicating from GNU/Linux with FreeRTOS.
+Launch the FreeRTOS application ``rpmsg_ping`` as we did above, then launch the Linux kernel as we did above, and from GNU/Linux launch the userspace 
+application ``rpmsg_echo.elf`` for communicating from GNU/Linux with FreeRTOS.
 
 <img src="2025-02-10-073944_2704x1050_scrot.png">
