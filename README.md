@@ -76,7 +76,7 @@ Mount the first partition of the SD-card we flashed earlier (``sudo mount /dev/s
 copy ``output/build/uboot-*/u-boot.bin`` from the Buildroot directory to this SD-card partition.
 In this partition, also edit the content of ``config.txt`` to append with ``enable_uart=1`` and replace
 ``kernel=Image`` with ``kernel=u-boot.bin`` to tell the Raspberry Pi4 to launch U-Boot instead
-of the Linux kernel. Finally, copy ``raspi4_freertos/Demo/CORTEX_A72_64-bit_Raspberrypi4/uart/uart.elf``
+of the Linux kernel. Finally, copy ``raspi4_freertos/FreeRTOS/Demo/CORTEX_A72_64-bit_Raspberrypi4/uart/uart.elf``
 to this partition as the FreeRTOS application to be executed. Unmount the SD-card (``sudo umount /mnt``).
 
 Launch the Raspberry Pi 4 fitted with this new SD-card: if all goes well the serial port (pins 
