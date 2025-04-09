@@ -54,7 +54,7 @@ make -j12
 sudo make install
 ./ct-ng menuconfig
 ```
-and select under Target Options: Target Architecture (arm) and Bitness (64-bit), then
+and select under ``Target Options``: ``Target Architecture (arm)`` and ``Bitness (64-bit)``, then
 ```
 ./ct-ng build
 export PATH=$HOME/x-tools/aarch64-unknown-elf/bin/:$PATH
