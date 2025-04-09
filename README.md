@@ -201,6 +201,7 @@ and edit ``libmetal/cmake/platforms/raspi4-freertos.cmake`` and ``open-amp/cmake
 to replace ``aarch64-none-elf-`` of ``CROSS_PREFIX`` with ``aarch64-unknown-elf-``. Then follow the sequence 
 proposed at https://github.com/TImada/raspi4_freertos_rpmsg/blob/master/docs/freertos_build.md from step 4 and onward, making
 sure the shell variable ``RASPI4_BASE`` has been set to the directory holding ``raspi4_freertos_rpmsg`` and ``raspi4_freertos``.
+At the end of step 5, make sure to ``make CROSS=aarch64-unknown-elf-`` (``unknown`` instead of ``none``).
 
 Add <del>``#include <stdint.h>`` at the beginning of ``samples/freertos/rpmsg_ping/src/uart.h``   
 and</del> an explicit cast from pointer to integer as ``irq_vect = (int)prproc->armlocal_dev->irq_info;`` in
