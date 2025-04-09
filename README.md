@@ -51,6 +51,7 @@ cd crosstool-ng/
 ./bootstrap
 ./configure
 make -j12
+sudo make install
 ./ct-ng menuconfig
 ```
 and select under Target Options: Target Architecture (arm) and Bitness (64-bit), then
