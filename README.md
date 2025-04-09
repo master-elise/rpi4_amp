@@ -44,7 +44,7 @@ with ``sudo dmesg | tail``).
 Following https://github.com/TImada/raspi4_freertos, compile FreeRTOS for the Raspberry Pi 4. 
 
 First we need a cross-compilation toolchain for baremetal 64-bit ARM, which can be generated using 
-Crosstool-NG:
+Crosstool-NG (requires the packages ``libtool-bin gawk help2man texinfo`` for generating the documentation with ``makeinfo``):
 ```
 git clone https://github.com/crosstool-ng/crosstool-ng
 cd crosstool-ng/
