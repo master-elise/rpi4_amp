@@ -59,13 +59,16 @@ and select under Target Options: Target Architecture (arm) and Bitness (64-bit),
 ./ct-ng build
 export PATH=$HOME/x-tools/aarch64-unknown-elf/bin/:$PATH
 ```
+This operation completes in 25 minutes on a 3.6 GHz Intel Xeon E5-1620.
 
-Then ``git clone https://github.com/TImada/raspi4_freertos`` and
+## Compile the FreeRTOS example for the RPi4
+
+Clone and compile the FreeRTOS example using the baremeta toolchain:
 ```
-cd raspi4_freertos/Demo/CORTEX_A72_64-bit_Raspberrypi4/uart
+git clone https://github.com/TImada/raspi4_freertos
+cd raspi4_freertos/FreeRTOS/Demo/CORTEX_A72_64-bit_Raspberrypi4/uart
 make CROSS=aarch64-unknown-elf-
 ```
-This operation completes in 25 minutes on a 3.6 GHz Intel Xeon E5-1620.
 
 ## Update the SD-card configuration to launch U-Boot
 
