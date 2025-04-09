@@ -153,7 +153,7 @@ booti ${kernel_addr_r} - ${fdt_addr}
 
 to start the Linux kernel and load GNU tools from the root filesystem.
 
-<img src="rpi4_FreeRTOS.jpg">
+<img src="rpi4_FreeRTOS.png">
 
 <img src="2025-02-09-130741_2944x1080_scrot.png">
 
