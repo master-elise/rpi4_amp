@@ -64,7 +64,8 @@ Then ``git clone https://github.com/TImada/raspi4_freertos`` and
 ```
 cd raspi4_freertos/Demo/CORTEX_A72_64-bit_Raspberrypi4/uart
 make CROSS=aarch64-unknown-elf-
-``` 
+```
+This operation completes in 25 minutes on a 3.6 GHz Intel Xeon E5-1620.
 
 ## Update the SD-card configuration to launch U-Boot
 
