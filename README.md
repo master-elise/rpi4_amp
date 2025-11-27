@@ -74,7 +74,7 @@ make CROSS=aarch64-unknown-elf-
 Mount the first partition of the SD-card we flashed earlier (``sudo mount /dev/sdd1 /mnt``) and
 copy ``output/build/uboot-*/u-boot.bin`` from the Buildroot directory to this SD-card partition.
 In this partition, also edit the content of ``config.txt`` to append with ``enable_uart=1`` and replace
-``kernel=Image`` with ``kernel=u-boot.bin`` to tell the Raspberry Pi4 to launch U-Boot instead
+``kernel=Image`` or ``kernel=start4.elf`` with ``kernel=u-boot.bin`` to tell the Raspberry Pi4 to launch U-Boot instead
 of the Linux kernel. Finally, copy ``raspi4_freertos/FreeRTOS/Demo/CORTEX_A72_64-bit_Raspberrypi4/uart/uart.elf``
 to this partition as the FreeRTOS application to be executed. Unmount the SD-card (``sudo umount /mnt``).
 
