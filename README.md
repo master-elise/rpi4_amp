@@ -220,7 +220,7 @@ Finally we must replace ``-L/usr/local/lib`` in ``samples/linux/rpmsg_echo/build
 ``output/host/aarch64-buildroot-linux-gnu/sysroot/usr/lib`` and similarly replace ``INCLUDEPATH1 ?= /usr/local/include`` 
 with the Buildroot ``output/host/aarch64-buildroot-linux-gnu/sysroot/usr/include``. Replace in 
 ``raspi4_freertos_rpmsg/samples/linux/rpmsg_echo/build/Makefile`` the ``CROSS ?= aarch64-linux-gnu-`` with ``CROSS ?= aarch64-linux-`` to
-match the Buildroot compiler name, and make to generate the binary after making sure the Buildroot ``output/host/bin`` is still in
+match the Buildroot compiler name, and ``make`` from ``raspi4_freertos_rpmsg/samples/linux/rpmsg_echo/build`` to generate the binary after making sure the Buildroot ``output/host/bin`` is still in
 the PATH.
 
 Copy the FreeRTOS application ``rpmsg_ping.elf`` to the SD card first partition and the GNU/Linux ``rpmsg_echo`` to the second partition ``/root``. 
